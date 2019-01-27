@@ -2,6 +2,8 @@
 
 use std::collections::HashMap;
 
+use colored::*;
+
 // Returns the mean, median, and mode of `nums`.
 fn stats(nums: &Vec<i32>) -> (f64, f64, f64){
 
@@ -56,11 +58,14 @@ fn stats(nums: &Vec<i32>) -> (f64, f64, f64){
 }
 
 fn main() {
-    println!("Hello, world!");
+    println!("\n\n{}\n", "Implementations of suggested exercises from the Rust book.".white().bold());
+
+    println!("{}", "Chapter 8:".green().bold());
+    println!("{}", "Given a list of integers, use a vector and return the mean, median, and mode of the list.".green());
 
     let x = vec![1, 2, 3, 4, 5, 10, 200, 3, 2, 4];
 
     let (mean, median, mode) = stats(&x);
 
-    println!("the mean, median, and mode of {:?} are {}, {}, and {}", &x, mean, median, mode)
+    println!("The mean, median, and mode of {:?} are {}, {}, and {}.", &x, mean, median, mode)
 }
