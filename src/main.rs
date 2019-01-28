@@ -4,8 +4,8 @@ use std::collections::HashMap;
 
 use colored::*;
 
+
 fn mean(nums: &Vec<i32>) -> f64 {
-    // Mean.
     let mut mean = 0.0;
 
     for num in nums {
@@ -78,13 +78,9 @@ fn pig_latinize_word(word: &str) -> String {
 
 // TODO: should this function operate on Strings or &strs?
 fn pig_latin(a_str: String) -> String {
-    let mut latinized_words: Vec<String> = Vec::new();
-
-    // TODO: is there a map function?
-    for word in a_str.split(" ") {
-        latinized_words.push(pig_latinize_word(word));
-    }
-
+    // I don't know what a Rust closure is jsut yet, but I really wanted to use the map operation
+    // here so I'm using it before I've gotten to that part of the book. This is fine.
+    let latinized_words: Vec<String> = a_str.split(" ").map(|word| pig_latinize_word(word)).collect();
     latinized_words.join(" ")
 }
 
