@@ -1,0 +1,45 @@
+1/27/19
+
+belatedly starting a dev diary for this
+
+USEFUL COMMANDS:
+* rustup docs // opens the rust documentation locally
+* cargo doc --open // opens the documentation for all of your project's dependencies locally
+
+so far i've written mean/median/mode and a first stab at pig latin, but my pig latin function
+is really gross so i sent peter an email asking for advice on what i'm doing wrong
+
+lost wifi connection so i'm just rereading the earlier portions of the book locally,
+on chapter 2 right now
+
+i read all this stuff a month ago and i've forgotten all of it because i didn't use any of it
+so i'm glad there are exercises now! and am refreshing my memory
+
+the docs also talk about "rust by example", which i should work through (TODO)
+they say it has exercises too!
+
+for historical record, here's the hideous pig latin function i'm asking peter about:
+
+fn pig_latinize_word(word: &str) -> String {
+    let characters: Vec<char> = word.chars().collect();
+    let first_char = &characters[0];
+
+    let mut rest = String::new();
+    for character in characters[1..].iter() {
+        rest.push(*character);
+    }
+
+    // dude what in the _hell_
+    if vec!["a", "e", "i", "o", "u", "y"].contains(&&(first_char.to_lowercase().to_string())[..]) {
+        format!("{}-{}hay", rest, first_char)
+    } else {
+        format!("{}-{}ay", rest, first_char)
+    }
+}
+
+the bit where i check to see if a character is lowercase is just gross as hell,
+and i don't like that it takes a &str and returns a String (i want it to just use one, but i don't know
+which one's the right choice!), and pulling the string apart into first and rest feels kinda gross
+(but i'm not sure if it's possible to improve that part).
+hopefully peter has wisdom.
+
