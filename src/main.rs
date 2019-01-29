@@ -55,10 +55,14 @@ fn mode(nums: &Vec<i32>) -> i32{
     mode
 }
 
+// Documentation comments aren't covered until chapter 14 and I'm on chapter 8
+// right now, so I'm just winging it on comments atm.
+
 // Prompt:
 // The first consonant of each word is moved to the end of the word and “ay” is added,
 // so “first” becomes “irst-fay.” Words that start with a vowel have “hay” added to the end
 // instead (“apple” becomes “apple-hay”).
+// Intentionally not handling one-letter words and punctuation, keeping this simple.
 fn pig_latinize_word(word: &str) -> String {
     let characters: Vec<char> = word.chars().collect();
     let first_char = &characters[0];
@@ -70,7 +74,7 @@ fn pig_latinize_word(word: &str) -> String {
 
     // dude what in the _hell_
     if vec!["a", "e", "i", "o", "u", "y"].contains(&&(first_char.to_lowercase().to_string())[..]) {
-        format!("{}-{}hay", rest, first_char)
+        format!("{}-hay", word)
     } else {
         format!("{}-{}ay", rest, first_char)
     }
@@ -99,7 +103,7 @@ fn main() {
     println!("The mean, median, and mode of {:?} are {}, {}, and {}.", &x, mean(&x), median(&x), mode(&x));
 
     println!("\n{}", "Convert strings to pig latin.".green());
-    println!("{}", pig_latin("Hello there how are you".to_string()));
+    println!("{}", pig_latin("Hello there how are you I am fine".to_string()));
 
     println!("\n{}", "Using a hash map and vectors, create a text interface to allow a user to add employee names to a department in a company. For example, “Add Sally to Engineering” or “Add Amir to Sales.” Then let the user retrieve a list of all people in a department or all people in the company by department, sorted alphabetically.".green());
     println!("{}", "UNIMPLEMENTED".red());
