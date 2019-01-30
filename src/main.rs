@@ -62,29 +62,24 @@ fn mode(nums: &Vec<i32>) -> i32{
 // The first consonant of each word is moved to the end of the word and “ay” is added,
 // so “first” becomes “irst-fay.” Words that start with a vowel have “hay” added to the end
 // instead (“apple” becomes “apple-hay”).
-// Intentionally not handling one-letter words and punctuation, keeping this simple.
+// (Intentionally not handling punctuation.)
 fn pig_latinize_word(word: &str) -> String {
-    let characters: Vec<char> = word.chars().collect();
-    let first_char = &characters[0];
 
-    let mut rest = String::new();
-    for character in characters[1..].iter() {
-        rest.push(*character);
-    }
-
-    // dude what in the _hell_
-    if vec!["a", "e", "i", "o", "u", "y"].contains(&&(first_char.to_lowercase().to_string())[..]) {
-        format!("{}-hay", word)
-    } else {
-        format!("{}-{}ay", rest, first_char)
+    // (This code taken wholesale from Peter Huene, because I was having a lot of trouble
+    // figuring out a sane way of expressing it because I'm still learning. Thanks, Peter!
+    let first = word.chars().nth(0).unwrap();
+    match first.to_lowercase().nth(0).unwrap() {
+        'a' | 'e' | 'i' | 'o' | 'u' => format!("{}-hay", word),
+        _ => format!("{}-{}ay", &word[1..], first),
     }
 }
 
-// TODO: should this function operate on Strings or &strs?
-fn pig_latin(a_str: String) -> String {
+fn pig_latin(a_str: &str) -> String {
     // I don't know what a Rust closure is jsut yet, but I really wanted to use the map operation
     // here so I'm using it before I've gotten to that part of the book. This is fine.
-    let latinized_words: Vec<String> = a_str.split(" ").map(|word| pig_latinize_word(word)).collect();
+    let latinized_words: Vec<String> = a_str.split(" ")
+        .map(|word| pig_latinize_word(word))
+        .collect();
     latinized_words.join(" ")
 }
 
@@ -103,7 +98,7 @@ fn main() {
     println!("The mean, median, and mode of {:?} are {}, {}, and {}.", &x, mean(&x), median(&x), mode(&x));
 
     println!("\n{}", "Convert strings to pig latin.".green());
-    println!("{}", pig_latin("Hello there how are you I am fine".to_string()));
+    println!("{}", pig_latin("Hello there how are you I am fine"));
 
     println!("\n{}", "Using a hash map and vectors, create a text interface to allow a user to add employee names to a department in a company. For example, “Add Sally to Engineering” or “Add Amir to Sales.” Then let the user retrieve a list of all people in a department or all people in the company by department, sorted alphabetically.".green());
     println!("{}", "UNIMPLEMENTED".red());

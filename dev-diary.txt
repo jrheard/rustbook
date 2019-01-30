@@ -43,3 +43,25 @@ which one's the right choice!), and pulling the string apart into first and rest
 (but i'm not sure if it's possible to improve that part).
 hopefully peter has wisdom.
 
+======
+
+1/29/19
+
+text is complicated. pretz sent me https://oleb.net/blog/2017/11/swift-4-strings/ which is spooky.
+
+peter hooked me up with this implementation:
+
+fn pig_latinize_word(word: &str) -> String {
+    let first = word.chars().nth(0).unwrap();
+    match first.to_lowercase().nth(0).unwrap() {
+        'a' | 'e' | 'i' | 'o' | 'u' => format!("{}-hay", word),
+        _ => format!("{}-{}ay", &word[1..], first),
+    }
+}
+
+which is much much better. apparently a ToLower struct is an iterable, because
+converting that german uppercase B-looking character to lowercase turns it into 'ss' for example.
+
+text is spooky scary!
+
+
