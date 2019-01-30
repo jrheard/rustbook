@@ -83,6 +83,30 @@ fn pig_latin(a_str: &str) -> String {
     latinized_words.join(" ")
 }
 
+
+// Pretty sure &strs would be more natural than Strings, but I haven't learned about lifetimes yet.
+fn add_employee(directory: &mut HashMap<String, Vec<String>>, command: &str) -> () {
+    // Parse the command.
+    let words: Vec<&str> = command.split(" ").collect();
+    let employee = words[1];
+    let department = words[3];
+
+    let department_entry = directory.entry(department.to_string()).or_insert(Vec::new() as Vec<String>);
+    department_entry.push(employee.to_string());
+}
+
+fn print_employees(directory: &HashMap<String, Vec<String>>) -> () {
+    let mut keys: Vec<&String> = directory.keys().collect();
+    keys.sort();
+
+    for department in &keys {
+        let mut employees = directory.get(*department).unwrap().clone();
+        employees.sort();
+        println!("{} has employees {:?}", department, employees);
+    }
+
+}
+
 fn main() {
     println!("\n\n{}\n\n", "Implementations of suggested exercises from the Rust book.".bold());
 
@@ -101,5 +125,14 @@ fn main() {
     println!("{}", pig_latin("Hello there how are you I am fine"));
 
     println!("\n{}", "Using a hash map and vectors, create a text interface to allow a user to add employee names to a department in a company. For example, “Add Sally to Engineering” or “Add Amir to Sales.” Then let the user retrieve a list of all people in a department or all people in the company by department, sorted alphabetically.".green());
-    println!("{}", "UNIMPLEMENTED".red());
+
+    let mut directory = HashMap::new();
+    add_employee(&mut directory, "Add Sally to Engineering");
+    add_employee(&mut directory, "Add Amir to Sales");
+    add_employee(&mut directory, "Add Bob to Engineering");
+    add_employee(&mut directory, "Add Cathy to Engineering");
+    add_employee(&mut directory, "Add Joseph to Sales");
+    add_employee(&mut directory, "Add Angela to Finance");
+
+    print_employees(&directory);
 }
