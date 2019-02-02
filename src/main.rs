@@ -90,9 +90,6 @@ fn pig_latin(a_str: &str) -> String {
     latinized_words.join(" ")
 }
 
-// TODO lifetimes
-
-// Pretty sure &strs would be more natural than Strings, but I haven't learned about lifetimes yet.
 fn add_employee(directory: &mut HashMap<String, Vec<String>>, command: &str) {
     // Parse the command.
     let words: Vec<&str> = command.split(" ").collect();
