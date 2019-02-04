@@ -81,13 +81,11 @@ fn pig_latinize_word(word: &str) -> String {
 }
 
 fn pig_latin(a_str: &str) -> String {
-    // I don't know what a Rust closure is just yet, but I really wanted to use the map operation
-    // here so I'm using it before I've gotten to that part of the book. This is fine.
-    let latinized_words: Vec<String> = a_str
+    a_str
         .split(" ")
-        .map(|word| pig_latinize_word(word))
-        .collect();
-    latinized_words.join(" ")
+        .map(pig_latinize_word)
+        .collect::<Vec<String>>()
+        .join(" ")
 }
 
 fn add_employee(directory: &mut HashMap<String, Vec<String>>, command: &str) {

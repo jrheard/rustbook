@@ -71,4 +71,13 @@ text is spooky scary!
 TODO read https://aturon.github.io/blog/2015/08/27/epoch/
 and https://stjepang.github.io/2019/01/29/lock-free-rust-crossbeam-in-2019.html
 
+=====
 
+2/3/19
+
+TODO look into https://github.com/majutsushi/tagbar
+
+vim rust integration looks good!
+
+finished chapter 12, gonna read chapter 13 too before i start on advent of code
+since it's about functional programming type stuff!
