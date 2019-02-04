@@ -84,7 +84,7 @@ fn pig_latin(a_str: &str) -> String {
     a_str
         .split(" ")
         .map(pig_latinize_word)
-        .collect::<Vec<String>>()
+        .collect::<Vec<_>>()
         .join(" ")
 }
 
@@ -94,6 +94,7 @@ fn add_employee(directory: &mut HashMap<String, Vec<String>>, command: &str) {
     let employee = words[1];
     let department = words[3];
 
+    // Update the directory.
     let department_entry = directory
         .entry(department.to_string())
         .or_insert(Vec::new() as Vec<String>);
